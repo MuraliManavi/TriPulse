@@ -1,0 +1,29 @@
+package com.example.ayurpulse;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Random;
+
+@SpringBootApplication
+@Controller
+public class AyurPulseApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(AyurPulseApplication.class, args);
+    }
+
+    @GetMapping("/")
+    public String index(Model model) {
+        Random random = new Random();
+        model.addAttribute("vata", 60 + random.nextInt(10));
+        model.addAttribute("pitta", 70 + random.nextInt(10));
+        model.addAttribute("kapha", 65 + random.nextInt(10));
+        model.addAttribute("temp", String.format("%.1f", 36 + random.nextDouble()));
+        model.addAttribute("gps", "Lat: 17.385044, Lng: 78.486671");
+        return "index";
+    }
+}
